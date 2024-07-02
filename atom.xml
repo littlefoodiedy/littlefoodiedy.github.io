@@ -48,7 +48,7 @@ tag: markdown �﷨&lt;/p&gt;
     <link href="http://example.com/2024/07/02/hello-world/"/>
     <id>http://example.com/2024/07/02/hello-world/</id>
     <published>2024-07-01T20:10:00.461Z</published>
-    <updated>2024-07-01T20:10:00.461Z</updated>
+    <updated>2024-07-02T17:39:28.259Z</updated>
     
     
       
@@ -60,6 +60,8 @@ tag: markdown �﷨&lt;/p&gt;
       
     
     
+    
+    <category term="test class" scheme="http://example.com/categories/test-class/"/>
     
     
   </entry>

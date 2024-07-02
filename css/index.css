@@ -3469,6 +3469,7 @@ figure.highlight .code-expand-btn:not(.expand-done) ~ pre,
 figure.highlight .code-expand-btn:not(.expand-done) ~ table {
   margin-bottom: 0;
   overflow: hidden;
+  height: 200px;
 }
 figure.highlight .code-expand-btn svg {
   margin: 0;
@@ -3551,6 +3552,9 @@ figure.highlight .code-expand-btn svg {
   overflow-x: auto;
   color: var(--highlight-foreground);
   background: var(--highlight-background);
+}
+.highlight .code pre {
+  white-space: pre-wrap;
 }
 .highlight pre {
   font-size: 14px !important;
@@ -3724,4 +3728,20 @@ pre .coffeescript .title {
 .trm-fixed-container.offset #trm-back-top {
   opacity: 1;
   transform: translateY(0) scale(1);
+}
+:root {
+  --primary: #5f62e1;
+  --primary-70: rgba(95, 98, 225, 0.7);
+  --primary-50: rgba(95, 98, 225, 0.5);
+  --primary-30: rgba(95, 98, 225, 0.3);
+  --primary-weak: #697be2;
+  --primary-weak-50: rgba(105, 123, 226, 0.5);
+}
+:root.dark {
+  --primary: #a4ce60;
+  --primary-70: rgba(164, 206, 96, 0.7);
+  --primary-50: rgba(164, 206, 96, 0.5);
+  --primary-30: rgba(164, 206, 96, 0.3);
+  --primary-weak: #82df7a;
+  --primary-weak-50: rgba(130, 223, 122, 0.5);
 }
