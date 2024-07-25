@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="二叉树  层次遍历  结构体（队列+树） 我采用的是顺序队列 12345678910111213141516171819202122232425262728#pragma oncetypedef int ElemType;#define MAXSIZE 8&#x2F;&#x2F;二叉树typedef struct BiTNode &#123;	ElemType data;	BiTNode *lchild;	BiTN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BinaryTree">
+<meta property="og:url" content="http://example.com/2024/07/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84--%E4%BA%8C%E5%8F%89%E6%A0%91/index.html">
+<meta property="og:site_name" content="小吃货落樱">
+<meta property="og:description" content="二叉树  层次遍历  结构体（队列+树） 我采用的是顺序队列 12345678910111213141516171819202122232425262728#pragma oncetypedef int ElemType;#define MAXSIZE 8&#x2F;&#x2F;二叉树typedef struct BiTNode &#123;	ElemType data;	BiTNode *lchild;	BiTN">
+<meta property="og:locale">
+<meta property="article:published_time" content="2024-07-05T13:16:00.000Z">
+<meta property="article:modified_time" content="2024-07-25T11:47:56.341Z">
+<meta name="twitter:card" content="summary">
+
+
+<title >BinaryTree</title>
+
+<!-- Favicon -->
+
+    <link href='/imgae/electro-copy.svg?v=2.2.2' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/imgae/geo-copy.svg?v=2.2.2' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+    <link href='/imgae/geo-plume.svg?v=2.2.2' rel='apple-touch-icon' sizes='180x180' ></link>
+
+
+    <link href='/site.webmanifest' rel='manifest' ></link>
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://npm.elemecdn.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"example.com","author":null,"root":"/","typed_text":["learner"],"theme_version":"2.2.2","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/imgae/cryo-copy.svg","icon16":"/imgae/electro-copy.svg","icon32":"/imgae/geo-copy.svg","apple_touch_icon":"/imgae/geo-plume.svg","webmanifest":"/site.webmanifest","visibilitychange":true,"hidden":"/imgae/plume-copy.svg","show_text":"(/≧▽≦/)咦！又好了！","hide_text":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://npm.elemecdn.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":false,"title":"default","height_limit":200},"toc":{"post_title":false},"live_time":{"start_time":"","prefix":"博客已萌萌哒运行 undefined 天"},"danmu":{"enable":false,"el":".trm-banner"},"covers":["/imagae/18.png","/imgae/21.png","/imgae/13.png","/imgae/9.png","/imgae/20.png"],"search":{"enable":true,"type":"local","href":"https://www.google.com/search?q=site:","domain":null}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-07-25 19:47:56"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.2.2" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+
+ 
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="小吃货落樱" type="application/atom+xml">
+</head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" style="opacity: 0">
+            <!-- top bar -->
+            <header class="trm-top-bar">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/imgae/cryo-copy.svg">
+    
+    
+        <div class="trm-logo-text">
+            小吃货<span>落樱</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    首页
+                </a>
+                
+                <ul>
+                    
+                    <li>
+                        <a  href="/archives2/" target="">
+                            关于
+                        </a>
+                    </li>
+                    
+                </ul>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    归档
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/categories/" target="">
+                    分类
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/links/" target="">
+                    友链
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/about/" target="">
+                    关于
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/gallery/" target="">
+                    相册
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+    
+    <div id="trm-search-btn" class="trm-search-btn">
+        <i class="iconfont fas fa-search"></i>
+    </div>
+     
+
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/imgae/29.jpg">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-12">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text trm-text-center ">
+                        <div class="trm-label trm-mb-20">
+                            数据结构的世界
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            BinaryTree
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2024
+                                    </span>
+                                </li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <span id="scroll-triger" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </span>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+            <div class="trm-page-content col-lg-12">
+                <div id="trm-content" class="trm-content">
+                    <div class="trm-post-info row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            07/25
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            19:47
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="二叉树"><a class="markdownIt-Anchor" href="#二叉树"></a> 二叉树</h1>
+<h2 id="层次遍历"><a class="markdownIt-Anchor" href="#层次遍历"></a> 层次遍历</h2>
+<h3 id="结构体队列树"><a class="markdownIt-Anchor" href="#结构体队列树"></a> 结构体（队列+树）</h3>
+<p>我采用的是顺序队列</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> ElemType;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXSIZE 8</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//二叉树</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">BiTNode</span> &#123;</span></span><br><span class="line">	ElemType data;</span><br><span class="line">	BiTNode *lchild;</span><br><span class="line">	BiTNode *rchild;</span><br><span class="line">&#125;*BiTree,BiTNode;</span><br><span class="line"></span><br><span class="line"><span class="comment">//队列</span></span><br><span class="line"><span class="keyword">typedef</span> BiTNode* Type;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">	Type data[MAXSIZE];</span><br><span class="line">	<span class="type">int</span> front;</span><br><span class="line">	<span class="type">int</span> rear;</span><br><span class="line">	<span class="type">int</span> size;</span><br><span class="line">&#125;SeQueue;</span><br><span class="line"></span><br><span class="line"><span class="comment">//栈</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Stack</span>&#123;</span></span><br><span class="line">	Type data[MAXSIZE];</span><br><span class="line">	<span class="type">int</span> top;</span><br><span class="line">	<span class="type">int</span> length;</span><br><span class="line">&#125;SqStack;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="基本操作"><a class="markdownIt-Anchor" href="#基本操作"></a> 基本操作</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;struct.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//-------队列----------</span></span><br><span class="line"><span class="comment">//初始化队列</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">initQueue</span><span class="params">(SeQueue &amp;Q)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//判断队列是否为空</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isEmpty</span><span class="params">(SeQueue Q)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//元素入队</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">enQueue</span><span class="params">(SeQueue &amp;Q,Type x)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//出队</span></span><br><span class="line">Type <span class="title function_">deQueue</span><span class="params">(SeQueue &amp;Q)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取队头</span></span><br><span class="line">Type <span class="title function_">getHead</span><span class="params">(SeQueue Q)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取队列长度</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">getSize</span><span class="params">(SeQueue Q)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//--------------------树----------------------</span></span><br><span class="line"><span class="comment">//初始化二叉树</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">initTree</span><span class="params">(BiTree &amp;T)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建二叉树</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">createTree</span><span class="params">(BiTree &amp;T)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//前序遍历</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">preOrder</span><span class="params">(BiTree T)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//中序遍历</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">inOrder</span><span class="params">(BiTree T)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//后序遍历</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">postOrder</span><span class="params">(BiTree T)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//层序遍历</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">levekOrder</span><span class="params">(BiTree T)</span>;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="队列"><a class="markdownIt-Anchor" href="#队列"></a> 队列</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;basic.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;struct.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化队列</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">initQueue</span><span class="params">(SeQueue &amp;Q)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;MAXSIZE;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		Q.data[i]=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Q.size=<span class="number">0</span>;</span><br><span class="line">	Q.front=<span class="number">0</span>;</span><br><span class="line">	Q.rear=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//判断队列是否为空</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isEmpty</span><span class="params">(SeQueue Q)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> Q.front==Q.rear;</span><br><span class="line">	<span class="comment">//return Q.size==0;</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//元素入队</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">enQueue</span><span class="params">(SeQueue &amp;Q,Type x)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(Q.rear&gt;=MAXSIZE)<span class="comment">//Q.rear&gt;=MAXSIZE</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Q.data[Q.rear++]=x;</span><br><span class="line">	Q.size++;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//出队</span></span><br><span class="line">Type <span class="title function_">deQueue</span><span class="params">(SeQueue &amp;Q)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(isEmpty(Q))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		Q.size--;</span><br><span class="line">		<span class="keyword">return</span> Q.data[Q.front++];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取队头</span></span><br><span class="line">Type <span class="title function_">getHead</span><span class="params">(SeQueue Q)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(isEmpty(Q))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> Q.data[Q.front];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取队列长度</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">getSize</span><span class="params">(SeQueue Q)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> Q.size;</span><br><span class="line">	<span class="comment">//return Q.rear-Q.front</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="栈"><a class="markdownIt-Anchor" href="#栈"></a> 栈</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;basic.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;struct.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化栈</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">initStack</span><span class="params">(SqStack &amp;S)</span></span><br><span class="line">&#123;</span><br><span class="line">		S.top=<span class="number">0</span>;</span><br><span class="line">		S.length=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//判断栈是否为空</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isEmpty</span><span class="params">(SqStack S)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> S.top==<span class="number">0</span>?<span class="literal">true</span>:<span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//如果栈没有满，将x入栈</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">push</span><span class="params">(SqStack &amp;S, Type x)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(S.length&gt;MAXSIZE)<span class="comment">//S.top&gt;MAXSIZE</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		S.data[S.top]=x;</span><br><span class="line">		S.top++;</span><br><span class="line">	&#125;</span><br><span class="line">	S.length++;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//如果不为空，则将栈顶元素出栈，并返回</span></span><br><span class="line">Type <span class="title function_">pop</span><span class="params">(SqStack &amp;S)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(isEmpty(S))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Type now=S.data[S.top<span class="number">-1</span>];</span><br><span class="line">	S.top--;</span><br><span class="line">	S.length--;</span><br><span class="line">	<span class="keyword">return</span> now;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//销毁栈</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">destroy</span><span class="params">(SqStack &amp;S)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;S.length;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		S.data[i]=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	S.length=<span class="number">0</span>;</span><br><span class="line">	S.top=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//满栈</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isFull</span><span class="params">(Stack S)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> S.length&gt;=MAXSIZE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="树"><a class="markdownIt-Anchor" href="#树"></a> 树</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;basic.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;struct.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化二叉树</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">initTree</span><span class="params">(BiTree &amp;T)</span></span><br><span class="line">&#123;</span><br><span class="line">	T=<span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建二叉树</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">createTree</span><span class="params">(BiTree &amp;T)</span></span><br><span class="line">&#123;</span><br><span class="line">	ElemType x;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;x);</span><br><span class="line">	<span class="keyword">if</span>(x==<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		T=(BiTree)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(BiTNode));</span><br><span class="line">		T-&gt;data=x;</span><br><span class="line">		T-&gt;lchild=<span class="literal">NULL</span>;</span><br><span class="line">		T-&gt;rchild=<span class="literal">NULL</span>;</span><br><span class="line">		createTree(T-&gt;lchild);</span><br><span class="line">		createTree(T-&gt;rchild);</span><br><span class="line">	&#125;<span class="comment">//递归</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="层序遍历"><a class="markdownIt-Anchor" href="#层序遍历"></a> 层序遍历</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">levekOrder</span><span class="params">(BiTree T)</span></span><br><span class="line">&#123;</span><br><span class="line">	SeQueue Q;</span><br><span class="line">	initQueue(Q);</span><br><span class="line">	BiTNode* pre=T;</span><br><span class="line">	<span class="keyword">if</span>(pre)</span><br><span class="line">	&#123;</span><br><span class="line">		enQueue(Q,pre);</span><br><span class="line">		<span class="keyword">while</span>(!isEmpty(Q))</span><br><span class="line">		&#123;</span><br><span class="line">			BiTNode *head=deQueue(Q);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,head-&gt;data);</span><br><span class="line">			<span class="keyword">if</span>(head-&gt;lchild)</span><br><span class="line">			&#123;</span><br><span class="line">				enQueue(Q,head-&gt;lchild);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(head-&gt;rchild)</span><br><span class="line">			&#123;</span><br><span class="line">				enQueue(Q,head-&gt;rchild);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h2>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 给出树自下至上，自右至左的遍历算法</span><br></pre></td></tr></table></figure>
+<p>思路1：只需要将原来自上至下，自左至右的层序遍历的结果放入栈中，出栈即可得到</p>
+<p>思路2. 递归调用</p>
+<p>思路一：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">level_order</span><span class="params">(BiTree T)</span></span><br><span class="line">&#123;</span><br><span class="line">	SeQueue Q;</span><br><span class="line">	Stack S;</span><br><span class="line">	initStack(S);</span><br><span class="line">	initQueue(Q);</span><br><span class="line">	BiTNode *pre=T;</span><br><span class="line">	<span class="keyword">if</span>(pre)</span><br><span class="line">	&#123;</span><br><span class="line">		enQueue(Q,pre);</span><br><span class="line">		<span class="keyword">while</span>(!isEmpty(Q))</span><br><span class="line">		&#123;</span><br><span class="line">			BiTNode *head=deQueue(Q);</span><br><span class="line">			push(S,head);</span><br><span class="line">			<span class="keyword">if</span>(head-&gt;lchild)</span><br><span class="line">			&#123;</span><br><span class="line">				enQueue(Q,head-&gt;lchild);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(head-&gt;rchild)</span><br><span class="line">			&#123;</span><br><span class="line">				enQueue(Q,head-&gt;rchild);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(!isEmptyS(S))</span><br><span class="line">	&#123;</span><br><span class="line">		Type x=pop(S);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,x-&gt;data);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试样例及结果</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;struct.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;basic.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	BiTree T;</span><br><span class="line">	initTree(T);</span><br><span class="line">	createTree(T);</span><br><span class="line">	level_order(T);</span><br><span class="line">	system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="number">10</span> <span class="number">20</span> <span class="number">40</span> <span class="number">0</span> <span class="number">60</span> <span class="number">0</span> <span class="number">0</span> <span class="number">50</span> <span class="number">0</span> <span class="number">0</span> <span class="number">30</span> <span class="number">0</span> <span class="number">0</span></span><br><span class="line"><span class="number">60</span> <span class="number">50</span> <span class="number">40</span> <span class="number">30</span> <span class="number">20</span> <span class="number">10</span> 请按任意键继续. . .</span><br></pre></td></tr></table></figure>
+
+</article>
+    
+    <div class="trm-reward">
+        
+            <span class="trm-reward-btn trm-glow" onclick='var qr = document.getElementById("qr"); qr.style.display = (qr.style.display === "none") ? "block" : "none";'>
+                <i class="iconfont fas fa-hand-holding-usd"></i>
+            </span>
+        
+        <p class="trm-reward-comment">老爷，养我呜呜呜</p>
+        <div id="qr" style="display:none;">
+            
+                <div style="display:inline-block">
+                    <a rel="noopener noreferrer" href='imgae/alipay.png' target='_blank' >
+                       <img src="/imgae/alipay.png" alt="支付宝" loading="lazy">
+                    </a>
+                    <p>支付宝</p>
+                </div>
+            
+        </div>
+    </div>
+
+    
+
+</div>
+<div class="trm-post-next-prev row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-older-publications-card trm-scroll-animation trm-active-el">
+        <div class="trm-older-publication">
+            
+            <a class="trm-op-top trm-anima-link" href="/2024/07/05/visual%20C++%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%88%E8%87%AA%E7%94%A8%EF%BC%89/">
+                <span class="trm-op-cover">
+                    <img alt="cover" class="no-fancybox" src="/imgae/34.jpg">
+                </span>
+                <h6 class="trm-op-title">ERROR</h6>
+            </a>
+            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/07/05</li>
+                <li>21:16</li>
+                <li>数据结构C语言版</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-older-publications-card trm-scroll-animation trm-active-el">
+        <div class="trm-older-publication">
+            
+            <a class="trm-op-top trm-anima-link" href="/2024/07/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                <span class="trm-op-cover">
+                    <img alt="cover" class="no-fancybox" src="/imgae/24.jpg">
+                </span>
+                <h6 class="trm-op-title">链表</h6>
+            </a>
+            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/07/05</li>
+                <li>00:46</li>
+                <li>数据结构C语言版</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+    <div id="giscus-wrap" class="trm-card trm-scroll-animation comment-container"></div>
+<script data-swup-reload-script>
+    function loadGiscus() {
+        let nowTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+        const config = {
+            src: 'https://giscus.app/client.js',
+            "data-repo": 'littlefoodiedy/comments',
+            "data-repo-id": 'R_kgDOMRwPig',
+            "data-category": 'Announcements',
+            "data-category-id": 'DIC_kwDOMRwPis4CgkAZ',
+            "data-mapping": 'pathname',
+            "data-reactions-enabled": '1',
+            "data-emit-metadata": '0',
+            "data-theme": nowTheme,
+            "data-lang": 'zh-CN',
+            crossorigin: "anonymous",
+            async: true
+        }
+        let ele = document.createElement('script')
+        for (let key in config) {
+            ele.setAttribute(key, config[key])
+        }
+        document.getElementById('giscus-wrap').insertAdjacentElement('afterbegin', ele)
+    }
+
+    function changeGiscusTheme() {
+        let theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+
+        function sendMessage(message) {
+            const iframe = document.querySelector('iframe.giscus-frame');
+            if (!iframe) return;
+            iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+
+        sendMessage({
+            setConfig: {
+                theme: theme
+            }
+        });
+    }
+
+    loadGiscus();
+</script>
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <div class="trm-counter-up trm-scroll-animation">
+    <div class="trm-counter-number">
+        <span class="trm-counter">140</span>
+        <span class="trm-counter-symbol">+</span>
+    </div>
+    <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+    <div class="trm-label">Honors and Awards</div>
+</div>
+
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            
+
+    <div id="post-toc" class="trm-post-toc">
+      <div class="trm-post-toc-header">
+        目录导航
+				<span id="post-toc-top">
+					置顶
+				</span>
+      </div>
+      <div class="trm-post-toc-content">
+        <ol class="trm-toc"><li class="trm-toc-item trm-toc-level-1" title=" 二叉树"><a rel="nofollow" class="trm-toc-link" href="#二叉树"><span class="trm-toc-number">1.</span> <span class="trm-toc-text"> 二叉树</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-2" title=" 层次遍历"><a rel="nofollow" class="trm-toc-link" href="#层次遍历"><span class="trm-toc-number">1.1.</span> <span class="trm-toc-text"> 层次遍历</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-3" title=" 结构体（队列+树）"><a rel="nofollow" class="trm-toc-link" href="#结构体队列树"><span class="trm-toc-number">1.1.1.</span> <span class="trm-toc-text"> 结构体（队列+树）</span></a></li><li class="trm-toc-item trm-toc-level-3" title=" 基本操作"><a rel="nofollow" class="trm-toc-link" href="#基本操作"><span class="trm-toc-number">1.1.2.</span> <span class="trm-toc-text"> 基本操作</span></a></li><li class="trm-toc-item trm-toc-level-3" title=" 队列"><a rel="nofollow" class="trm-toc-link" href="#队列"><span class="trm-toc-number">1.1.3.</span> <span class="trm-toc-text"> 队列</span></a></li><li class="trm-toc-item trm-toc-level-3" title=" 栈"><a rel="nofollow" class="trm-toc-link" href="#栈"><span class="trm-toc-number">1.1.4.</span> <span class="trm-toc-text"> 栈</span></a></li><li class="trm-toc-item trm-toc-level-3" title=" 树"><a rel="nofollow" class="trm-toc-link" href="#树"><span class="trm-toc-number">1.1.5.</span> <span class="trm-toc-text"> 树</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-2" title=" 层序遍历"><a rel="nofollow" class="trm-toc-link" href="#层序遍历"><span class="trm-toc-number">1.2.</span> <span class="trm-toc-text"> 层序遍历</span></a></li><li class="trm-toc-item trm-toc-level-2" title=" 题目"><a rel="nofollow" class="trm-toc-link" href="#题目"><span class="trm-toc-number">1.3.</span> <span class="trm-toc-text"> 题目</span></a></li></ol></li></ol>
+      </div>
+    </div>
+
+            
+<div class="trm-fixed-container">
+    
+        <div class="trm-fixed-btn post-toc-btn" data-title="目录">
+            <i class="iconfont fas fa-th-list"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+  </div>
+  <!-- app wrapper end -->
+
+  
+    <div class="trm-search-popup">
+        <div class="trm-search-wrapper">
+            <div class="form trm-search-form">
+                <div class="trm-search-input-icon">
+                    <i class="iconfont fas fa-search"></i>
+                </div>
+                <input class="trm-search-input" type="text" placeholder="搜索文章...">
+                <div class="trm-search-btn-close">
+                    <i class="iconfont fas fa-times"></i>
+                </div>
+            </div>
+            <div class="trm-search-result-container">
+                <div class="trm-search-empty">
+                    请输入关键词进行搜索
+                </div>
+            </div>
+            <div class="trm-search-footer">
+                <div class="trm-search-stats"></div>
+                <ul class="trm-search-commands">
+                    <li>
+                        <kbd class="command-palette-commands-key">
+                            <svg width="15" height="15" aria-label="Escape key" role="img">
+                                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.2">
+                                    <path
+                                        d="M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993 0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016.8634 0 1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5c.032.5663-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-2.204v-.4603c0-1.0416.721-2.131 1.7073-2.131.9864 0 1.6425 1.031 1.5443 2.2492h-2.956">
+                                    </path>
+                                </g>
+                            </svg>
+                        </kbd>
+                        <span class="command-palette-Label">to close</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://npm.elemecdn.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.2.2"></script>
+    
+
+    
+        
+<script src="https://npm.elemecdn.com/hexo-generator-searchdb@1.4.0/dist/search.js"></script>
+
+        <script src="/js/plugins/local_search.js?v=2.2.2"></script>
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+		
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.2.2"></script>
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+</body>
+
+</html>
