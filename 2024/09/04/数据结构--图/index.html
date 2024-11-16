@@ -383,9 +383,9 @@
             
             <a class="trm-op-top trm-anima-link" href="/2024/09/05/C++/">
                 <span class="trm-op-cover">
-                    <img alt="cover" class="no-fancybox" src="/imgae/24.jpg">
+                    <img alt="cover" class="no-fancybox" src="/imgae/39.jpg">
                 </span>
-                <h6 class="trm-op-title">Sort</h6>
+                <h6 class="trm-op-title">C++</h6>
             </a>
             <div class="trm-divider trm-mb-15 trm-mt-20"></div>
             <ul class="trm-card-data trm-label">
@@ -422,49 +422,9 @@
 
     
 
-    <div id="giscus-wrap" class="trm-card trm-scroll-animation comment-container"></div>
-<script data-swup-reload-script>
-    function loadGiscus() {
-        let nowTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
-        const config = {
-            src: 'https://giscus.app/client.js',
-            "data-repo": 'littlefoodiedy/comments',
-            "data-repo-id": 'R_kgDOMRwPig',
-            "data-category": 'Announcements',
-            "data-category-id": 'DIC_kwDOMRwPis4CgkAZ',
-            "data-mapping": 'pathname',
-            "data-reactions-enabled": '1',
-            "data-emit-metadata": '0',
-            "data-theme": nowTheme,
-            "data-lang": 'zh-CN',
-            crossorigin: "anonymous",
-            async: true
-        }
-        let ele = document.createElement('script')
-        for (let key in config) {
-            ele.setAttribute(key, config[key])
-        }
-        document.getElementById('giscus-wrap').insertAdjacentElement('afterbegin', ele)
-    }
-
-    function changeGiscusTheme() {
-        let theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
-
-        function sendMessage(message) {
-            const iframe = document.querySelector('iframe.giscus-frame');
-            if (!iframe) return;
-            iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-        }
-
-        sendMessage({
-            setConfig: {
-                theme: theme
-            }
-        });
-    }
-
-    loadGiscus();
-</script>
+    <div class="trm-card trm-scroll-animation comment-container">
+    <div id="tcomment"></div>
+</div>
 
 
 
@@ -699,6 +659,22 @@
         
 
         
+
+            
+<script src="https://npm.elemecdn.com/twikoo@1.6.7/dist/twikoo.all.min.js" data-swup-reload-script data-reset="true"></script>
+
+            <script data-swup-reload-script>
+                twikoo.init({
+                    ...{"enable":true,"envId":"https://comment-git-main-littleflowers-projects.vercel.app","region":"ap-shanghai","option":"location.pathname"},
+                    el:'#tcomment'
+                }).then(function () {
+                    let container = document.querySelector('body>.tk-admin-container')
+                    if(container) container.remove()
+                    document.body.append(document.querySelector('.tk-admin-container'))
+                });;
+            </script>
+
+        
     
 
 		
@@ -725,6 +701,6 @@
 
 
 
-</body>
+<script src="https://unpkg.com/live2d-widget@^3.1.3/lib/L2Dwidget.min.js"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"https://unpkg.com/live2d-widget-model-nico@1.0.5/assets/nico.model.json"},"display":{"position":"left","width":190,"height":380},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
 
 </html>
